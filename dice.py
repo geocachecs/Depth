@@ -37,7 +37,7 @@ def averageColor(image):
 		
 
 # this function will take an image or a SECTION of an image and create a list of of average colors of its segents
-def dice(image,rect=None,squareSize=16):
+def dice(image,squareSize=100,rect=None):
 	
 	size = image.size
 	
@@ -57,8 +57,8 @@ def dice(image,rect=None,squareSize=16):
 	cropped = image.crop((rect.x,rect.y,rect.w,rect.h))
 	croppedSize = cropped.size
 	
-	iterationsAcross = croppedSize[0]/squareSize
-	iterationsDown = croppedSize[1]/squareSize
+	iterationsAcross = croppedSize[0]/squareSize+1
+	iterationsDown = croppedSize[1]/squareSize+1
 	width = squareSize
 	height = squareSize
 	output = []
@@ -67,8 +67,12 @@ def dice(image,rect=None,squareSize=16):
 		for j in range(0,iterationsDown):
 			if(squareSize+i*squareSize > croppedSize[0]):
 				width = croppedSize[0] - i*squareSize
+			else:
+				width = squareSize
 			if(squareSize+j*squareSize > croppedSize[1]):
 				height = croppedSize[1] - j*squareSize
+			else:
+				height = squareSize
 			
  			tempCropped = cropped.crop( (i*squareSize,j*squareSize,width+i*squareSize,height+j*squareSize) )
 			
