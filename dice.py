@@ -73,10 +73,10 @@ def dice(image,squareSize=100,rect=None):
 				height = croppedSize[1] - j*squareSize
 			else:
 				height = squareSize
+			if(width>0 and height>0):
+				tempCropped = cropped.crop( (i*squareSize,j*squareSize,width+i*squareSize,height+j*squareSize) )
 			
- 			tempCropped = cropped.crop( (i*squareSize,j*squareSize,width+i*squareSize,height+j*squareSize) )
-			
-			output.append( ( (i*squareSize,j*squareSize,width+i*squareSize,height+j*squareSize),averageColor(tempCropped) ) ) 
+				output.append( ( (i*squareSize,j*squareSize,width+i*squareSize,height+j*squareSize),averageColor(tempCropped) ) ) 
 	
 	return output
 
